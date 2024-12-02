@@ -112,18 +112,22 @@ func (gogl *Google) checkCaptcha(page *rod.Page) bool {
 
 func (gogl *Google) preparePage(page *rod.Page) {
 	// Remove "similar queries" lists
+	
 	_, err := page.Eval(`(() => { 
 		const elements = document.querySelectorAll('div[data-initq]');
-		elements.forEach(el => {
-			if (el && el.parentNode) {
-				el.parentNode.removeChild(el);
-			}
-		});
+		if (elements.length > 0) {
+			elements.forEach(el => {
+				if (el && el.parentNode) {
+					el.parentNode.removeChild(el);
+				}
+			});
+		}
 	})()`)
 	if err != nil {
 		logrus.Errorf("Error preparing the page: %s", err)
 	}
 }
+
 
 func (gogl *Google) acceptCookies(page *rod.Page) {
 	diaglogBtns, err := page.Timeout(gogl.Timeout / 10).Search("div[role='dialog'][aria-modal] button")
@@ -167,7 +171,7 @@ func (gogl *Google) Search(query core.Query) ([]core.SearchResult, error) {
 	// Find all results
 	results, err := page.Timeout(gogl.Timeout).Search("div[data-hveid]")
 	if err != nil {
-		logrus.Errorf("Cannot parse search results: %s", err)
+		logrus.Errorf("Cannot parse search results 1: %s", err)
 		return nil, core.ErrSearchTimeout
 	}
 
@@ -333,7 +337,7 @@ func (gogl *Google) SearchImage(query core.Query) ([]core.SearchResult, error) {
 
 		results, err := page.Timeout(gogl.Timeout).Search("div[data-hveid][data-ved][jsaction][jsdata]")
 		if err != nil {
-			logrus.Errorf("Cannot parse search results: %s", err)
+			logrus.Errorf("Cannot parse search results 2: %s", err)
 			return *core.ConvertSearchResultsMap(searchResultsMap), core.ErrSearchTimeout
 		}
 

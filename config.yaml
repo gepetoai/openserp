@@ -3,7 +3,7 @@ app:
   port: 8080
   debug: false
   verbose: true
-  timeout: 15
+  timeout: 60
   head: false
   leakless: false
   leave_head: false
