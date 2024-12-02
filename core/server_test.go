@@ -9,8 +9,8 @@ import (
 )
 
 var (
-	servHost = "127.0.0.1"
-	servPort = 7070
+	servHost = "0.0.0.0"
+	servPort = 8080
 	servAddr = fmt.Sprintf("%s:%d", servHost, servPort)
 )
 

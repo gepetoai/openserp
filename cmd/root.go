@@ -122,8 +122,8 @@ func initializeConfig(cmd *cobra.Command) error {
 }
 
 func init() {
-	RootCmd.PersistentFlags().IntVarP(&config.App.Port, "port", "p", 7070, "Port number to run server")
-	RootCmd.PersistentFlags().StringVarP(&config.App.Host, "host", "a", "127.0.0.1", "Host address to run server")
+	RootCmd.PersistentFlags().IntVarP(&config.App.Port, "port", "p", 8080, "Port number to run server")
+	RootCmd.PersistentFlags().StringVarP(&config.App.Host, "host", "a", "0.0.0.0", "Host address to run server")
 	RootCmd.PersistentFlags().IntVarP(&config.App.Timeout, "timeout", "t", 30, "Timeout to fail request")
 	RootCmd.PersistentFlags().StringVarP(&config.App.ConfigPath, "config", "c", "", "Configuration file path")
 	RootCmd.PersistentFlags().BoolVarP(&config.App.IsVerbose, "verbose", "v", false, "Use verbose output")
