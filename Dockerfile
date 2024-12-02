@@ -21,3 +21,5 @@ ADD config.yaml /usr/src/app
 
 ENTRYPOINT ["openserp"]
 
+CMD ["serve -l"]
+
